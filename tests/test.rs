@@ -344,14 +344,6 @@ fn gnu_static() {
 }
 
 #[test]
-fn gnu_no_dash_dash() {
-    let test = Test::gnu();
-    test.gcc().file("foo.c").compile("foo");
-
-    test.cmd(0).must_not_have("--");
-}
-
-#[test]
 fn msvc_smoke() {
     reset_env();
 
@@ -418,12 +410,4 @@ fn msvc_no_static_crt() {
     test.gcc().static_crt(false).file("foo.c").compile("foo");
 
     test.cmd(0).must_have("-MD");
-}
-
-#[test]
-fn msvc_no_dash_dash() {
-    let test = Test::msvc();
-    test.gcc().file("foo.c").compile("foo");
-
-    test.cmd(0).must_not_have("--");
 }
