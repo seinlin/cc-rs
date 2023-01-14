@@ -2611,7 +2611,7 @@ impl Build {
     /// Returns the C++ standard library:
     /// 1. If [cpp_link_stdlib](cc::Build::cpp_link_stdlib) is set, uses its value.
     /// 2. Else if the `CXXSTDLIB` environment variable is set, uses its value.
-    /// 3. Else the default is `libc++` for OS X and BSDs, `libc++_shared` for Android,
+    /// 3. Else the default is `libc++` for OS X, BSDs and Android,
     /// `None` for MSVC and `libstdc++` for anything else.
     fn get_cpp_link_stdlib(&self) -> Result<Option<String>, Error> {
         match self.cpp_link_stdlib.clone() {
@@ -2634,7 +2634,7 @@ impl Build {
                     } else if target.contains("openbsd") {
                         Ok(Some("c++".to_string()))
                     } else if target.contains("android") {
-                        Ok(Some("c++_shared".to_string()))
+                        Ok(Some("c++".to_string()))
                     } else {
                         Ok(Some("stdc++".to_string()))
                     }
